@@ -12,9 +12,15 @@
 ## 环境要求
 
 - Python 3.12+
+- Conda
 
-## 运行方式
+## 快速开始
 
 ```bash
+# 创建并激活 conda 环境
+conda create -n project_manager python=3.12
+conda activate project_manager
+
+# 运行
 python -m project_manager.main
 ```
