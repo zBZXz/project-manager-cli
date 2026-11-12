@@ -41,3 +41,40 @@
 1. 学习字符串、数字、布尔值、类型转换的更多用法
 2. 设计项目的基本信息字段（名称、描述、状态、创建时间等）
 3. 在 `models/project.py` 中开始实现
+
+---
+
+## Day 2~4 — 2026-11-12
+
+**今日学习主题：** 模块与包结构设计、`__init__.py` 底层机制、任务数据模型实现
+
+**完成的任务：**
+1. 独立编写并完善 `models/task.py` 任务模型（支持 `project_id`, `task_id`, `title`, `priority`, `status`, `description` 等）
+2. 在 `models/task.py` 中实现默认值参数配置，修复时间格式化（`%m` 月份与 `%M` 分钟的区别）
+3. 补充了各包目录下的 `__init__.py` 文件（`project_manager/`、`models/`、`services/`、`storage/`）
+4. 将主入口 `main.py` 的导入方式统一规范为绝对包路径 `from project_manager.models...`
+5. 验证根目录下使用 `python -m project_manager.main` 成功运行
+6. 深入探讨并整理技术专题笔记：[Python 包管理机制与 `__init__.py` 深度解析](notes/python_package_and_init.md)
+
+**遇到的问题：**
+1. `datetime.now().strftime("%Y-%M-%d")` 输出了错误的日期
+   - 原因：`%M` 代表 Minute（分钟），月份必须使用小写 `%m`（Month）
+   - 解决：修改为 `%Y-%m-%d %H:%M:%S`
+2. `ModuleNotFoundError: No module named 'models'` 报错
+   - 原因：在项目根目录下使用 `-m` 执行时，`sys.path[0]` 为根目录，直接 `from models` 无法被识别
+   - 解决：使用正规包导入 `from project_manager.models...`
+3. 对比了现代 Python 3.3+ (PEP 420) 不写 `__init__.py` 与写 `__init__.py` 的区别
+
+**今天真正理解的内容：**
+1. **常规包 vs 命名空间包**：
+   - 有 `__init__.py`：声明独立完整的包，遇到同名目录会**排他遮蔽**，防止被外部同名文件夹意外污染；
+   - 无 `__init__.py`：允许多个不同物理路径下的同名文件夹**合并拼装**（如企业级大库/SDK 插件）。
+2. **`python -m` 运行机制**：将代码置于根包命名空间下运行，统一了模块解析路径，是工程化标准规范。
+3. **参数默认值与类型注解**：提高函数的易用性与代码自解释性。
+
+**仍未理解的内容：**
+1. （待补充）
+
+**明日计划：**
+1. 在 `models/task.py` 中补充状态流转函数 `update_task_status`，自动联动 `done_at`
+2. 学习 List 与 Dict 的高级操作，实现根据条件过滤和查询任务列表
