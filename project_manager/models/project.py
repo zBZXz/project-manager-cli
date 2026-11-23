@@ -11,11 +11,14 @@
 
 from datetime import datetime
 
+# 合法的项目状态常量
+VALID_PROJECT_STATUSES = ("active", "completed", "archived")
+
 # 用一个模块级变量来自增 ID
 _next_id = 1
 
 
-def create_project(name, description=""):
+def create_project(name: str, description: str = "") -> dict:
     """创建一个新项目，返回一个字典。
 
     参数：
@@ -43,7 +46,7 @@ def create_project(name, description=""):
     return project
 
 
-def display_project_info(project):
+def display_project_info(project: dict) -> None:
     """格式化打印项目信息。"""
     print(f"[项目 #{project['id']}] {project['name']}")
     print(f"  描述:     {project['description'] or '（无）'}")
