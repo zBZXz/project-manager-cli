@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Python 学习计划",
+        "description": "11月系统学习 Python 基础",
+        "status": "active",
+        "created_at": "2026-11-24 09:52:43",
+        "updated_at": "2026-11-24 09:52:43"
+    },
+    {
+        "id": 2,
+        "name": "个人博客",
+        "description": "",
+        "status": "active",
+        "created_at": "2026-11-24 09:52:43",
+        "updated_at": "2026-11-24 09:52:43"
+    },
+    {
+        "id": 3,
+        "name": "CLI 工具开发",
+        "description": "开发一个命令行项目管理工具",
+        "status": "active",
+        "created_at": "2026-11-24 09:52:43",
+        "updated_at": "2026-11-24 09:52:43"
+    }
+]

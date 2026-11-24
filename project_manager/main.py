@@ -16,6 +16,8 @@ from project_manager.services.task_service import (
     get_tasks_by_status,
 )
 
+from project_manager.storage.json_storage import save_data, load_data
+
 
 def main():
     print("=" * 45)
@@ -89,7 +91,27 @@ def main():
         update_task_status(t1, "unknown_status")
     except ValueError as e:
         print(f"-> [成功拦截非法操作] 捕获到预期异常: {e}")
+     
+    # 5. 测试持久化保存功能
+    print("=" * 45)
+    print("【持久化保存功能测试】")
+    print("=" * 45)
 
+    # 5.1 测试保存
+    project_save_file_path = r"D:\personal-project\2026.11-project\project_manager\data\project.json"
+    task_save_file_path = r"D:\personal-project\2026.11-project\project_manager\data\task.json"
+    save_data(project_save_file_path, projects)
+    save_data(task_save_file_path, tasks)
+
+    # 5.2 测试读取
+    projects_data = load_data(project_save_file_path)
+    print("【项目数据】")
+    print(projects_data)
+    print()
+    tasks_data = load_data(task_save_file_path)
+    print("【任务数据】")
+    print(tasks_data)
+    print()
 
 if __name__ == "__main__":
     main()
